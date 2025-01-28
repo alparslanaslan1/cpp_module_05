@@ -6,7 +6,6 @@ class Bureaucrat {
     private:
         const std::string _name;
         size_t _grade;
-        void setGrade(int n);
     public:
         Bureaucrat(void);
         ~Bureaucrat(void);
@@ -16,8 +15,8 @@ class Bureaucrat {
         Bureaucrat &operator=(const Bureaucrat& copy);
         std::string getName(void) const;
         size_t getGrade(void) const;
-        void increaseGrade(void);
-        void decreaseGrade(void);
+        void incrementGrade();
+        void decrementGrade();
         void signAForm(AForm& f);
         void executeForm(AForm const & form);
         class GradeTooHighException: public std::exception {

@@ -1,23 +1,23 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form() : _name("Default Form"), _isSigned(false), _requiredGradeToSign(150), _requiredGradeToExecute(150) {
-    //
+Form::Form() : _name("Default Form"), _isSigned(false), _minGradeToSign(150), _minGradeToExecute(150) {
 }
 
-Form::~Form() {}
-
-Form::Form(std::string name): _name(name), _isSigned(false), _requiredGradeToSign(150),_requiredGradeToExecute(150) {
+Form::~Form() {
 }
 
-Form::Form(std::string name, int reqGtoSign, int reqGtoExec) : _name(name), _isSigned(false), _requiredGradeToSign(reqGtoSign), _requiredGradeToExecute(reqGtoExec) {
+Form::Form(std::string name): _name(name), _isSigned(false), _minGradeToSign(150),_minGradeToExecute(150) {
+}
+
+Form::Form(std::string name, int reqGtoSign, int reqGtoExec) : _name(name), _isSigned(false), _minGradeToSign(reqGtoSign), _minGradeToExecute(reqGtoExec) {
     if (reqGtoExec < 1 || reqGtoSign < 1)
         throw GradeTooHighException();
     else if (reqGtoExec > 150 || reqGtoSign > 150)
         throw GradeTooLowException();
 }
 
-Form::Form(const Form& copy) : _name(copy.getName()), _requiredGradeToSign(getGradeToSign()), _requiredGradeToExecute(getGradeToExec()) {
+Form::Form(const Form& copy) : _name(copy.getName()), _minGradeToSign(getGradeToSign()), _minGradeToExecute(getGradeToExec()) {
     *this = copy;
 }
 
@@ -33,11 +33,11 @@ std::string Form::getName() const {
 }
 
 size_t Form::getGradeToSign() const {
-    return _requiredGradeToSign;
+    return _minGradeToSign;
 }
 
 size_t Form::getGradeToExec() const {
-    return _requiredGradeToExecute;
+    return _minGradeToExecute;
 }
 
 std::string Form::getIsSigned(  ) const {

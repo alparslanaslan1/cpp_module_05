@@ -1,34 +1,38 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-AForm::AForm() : _name("Default AForm"),
-               _isSigned(false),
-               _requiredGradeToSign(150),
-               _requiredGradeToExecute(150) {}
+AForm::AForm() : _name("Default AForm"), _isSigned(false), _requiredGradeToSign(150), _requiredGradeToExecute(150) {
 
-AForm::~AForm(void) {}
+}
+
 
 AForm::AForm(std::string name): _name(name),
                               _isSigned(false),
                               _requiredGradeToSign(150),
-                              _requiredGradeToExecute(150) {}
+                              _requiredGradeToExecute(150) {
+                              }
 
 AForm::AForm(std::string name,
-           int reqGtoSign,
-           int reqGtoExec) : 
-           _name(name),
-           _isSigned(false),
-           _requiredGradeToSign(reqGtoSign),
-           _requiredGradeToExecute(reqGtoExec) {
-    if (reqGtoExec < 1 || reqGtoSign < 1)
+             int gradeRequiredToSign,
+             int gradeRequiredToExecute) : 
+             _name(name),
+             _isSigned(false),
+             _requiredGradeToSign(gradeRequiredToSign),
+             _requiredGradeToExecute(gradeRequiredToExecute) {
+
+    if (gradeRequiredToSign < 1 || gradeRequiredToExecute < 1)
         throw GradeTooHighException();
-    else if (reqGtoExec > 150 || reqGtoSign > 150)
+    else if (gradeRequiredToSign > 150 || gradeRequiredToExecute > 150)
         throw GradeTooLowException();
 }
 
+
+AForm::~AForm(void) {
+}
+
 AForm::AForm(const AForm& copy) : _name(copy.getName()),
-                               _requiredGradeToSign(getGradeToSign()),
-                               _requiredGradeToExecute(getGradeToExec()) {
+                               _requiredGradeToSign(copy.getGradeToSign()),
+                               _requiredGradeToExecute(copy.getGradeToExec()) {
     *this = copy;
 }
 

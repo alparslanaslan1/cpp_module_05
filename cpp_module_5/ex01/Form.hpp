@@ -10,8 +10,8 @@ class Form {
     private:
         const std::string _name;
         bool _isSigned;
-        const size_t _requiredGradeToSign;
-        const size_t _requiredGradeToExecute;
+        const size_t _minGradeToSign;
+        const size_t _minGradeToExecute;
     public:
         Form();
         Form(std::string name);

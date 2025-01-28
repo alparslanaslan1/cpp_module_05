@@ -1,10 +1,13 @@
-#pragma once
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
 
 #include "Form.hpp"
 
 #define RED "\033[31m"
 #define BLUE "\033[34m"
 #define RESET "\033[0m"
+
+class Form;
 
 class Bureaucrat {
     private:
@@ -33,4 +36,5 @@ class Bureaucrat {
 
 std::ostream &operator<<(std::ostream& o, const Bureaucrat& b);
 
+#endif
 

@@ -1,6 +1,6 @@
-NAME = Form
+NAME = Bureaucrat
 
-SRCS = main.cpp Bureaucrat.cpp Form.cpp
+SRCS = main.cpp Bureaucrat.cpp
 
 OBJ_DIR = .objs
 

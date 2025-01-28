@@ -2,11 +2,9 @@
 
 
 Bureaucrat::Bureaucrat(): _name("default"), _grade(150){
-    std::cout << "default constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string name): _name(name), _grade(150){
-    std::cout << "name constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string name, size_t grade) : _name(name)
@@ -19,18 +17,15 @@ Bureaucrat::Bureaucrat(const std::string name, size_t grade) : _name(name)
 }
 
 Bureaucrat::~Bureaucrat(){
-    std::cout << "destructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other.getName()){
-    //
     this->_grade = other._grade;
 }
 
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
-    //
 	if (this != &other)
 		this->_grade = other._grade;
 	return *this;
@@ -72,11 +67,16 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 
 void Bureaucrat::signForm(Form& f) {
     try {
-        f.beSigned(*this); // Bürokrat formu imzalamaya çalışır.
-        std::cout << BLUE << _name << " signed " << f.getName() << RESET << std::endl;
+        f.beSigned(*this);
+        std::cout << BLUE << _name << " successfully signed \"" << f.getName() 
+                  << "\" form." << RESET << std::endl;
     } catch (std::exception& e) {
-        // Bürokrat imzalayamazsa hata mesajı kırmızı yazdırılır.
-        std::cout << RED << _name << " couldn't sign " << f.getName()
-                  << " because " << e.what() << RESET << std::endl;
+        std::cout << RED << _name << " could not sign \"" << f.getName() 
+                  << "\" form. Reason: " << e.what() << RESET << std::endl;
     }
 }
+
+
+
+
+

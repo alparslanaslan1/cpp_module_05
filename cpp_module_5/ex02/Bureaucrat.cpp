@@ -6,8 +6,9 @@ Bureaucrat::~Bureaucrat(void) {}
 
 Bureaucrat::Bureaucrat(std::string name) : _name(name), _grade(150) {}
 
-Bureaucrat::Bureaucrat(std::string name, size_t grade) : _name(name) {
-    setGrade(grade);
+Bureaucrat::Bureaucrat(std::string name, size_t grade) : _name(name), _grade(grade) {
+    if(_grade > 150 || _grade < 1)
+        throw GradeTooHighException();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy.getName()) {
@@ -54,20 +55,18 @@ void Bureaucrat::executeForm(AForm const & form) {
     }
 }
 
-void Bureaucrat::increaseGrade(void) {
-    setGrade(getGrade() - 1);
+void Bureaucrat::decrementGrade()
+{
+	if (_grade >= 150)
+		throw GradeTooLowException();
+	_grade++;
 }
 
-void Bureaucrat::decreaseGrade(void) {
-    setGrade(getGrade() + 1);
-}
-
-void Bureaucrat::setGrade(int n) {
-    if (n < 1)
-        throw GradeTooHighException();
-    else if (n > 150)
-        throw GradeTooLowException();
-    _grade = n;
+void Bureaucrat::incrementGrade()
+{
+	if (_grade <= 1)
+		throw GradeTooHighException();
+	_grade--;
 }
 
 std::ostream& operator<<(std::ostream& o, const Bureaucrat& b) {
